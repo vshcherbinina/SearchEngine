@@ -1,0 +1,45 @@
+parsing-settings:
+    sites:
+      - url: http://www.playback.ru/
+        name: PlayBack.ru
+      - url: https://www.skillbox.ru
+        name: Skillbox
+      - url: http://radiomv.ru/
+        name: "Милицейская волна"
+      - url: https://ipfran.ru/
+        name: "Институт прикладной физики им. А.В. Гапонова-Грехова"
+      - url: https://dimonvideo.ru/
+        name: DIMONVIDEO
+      - url: https://nikoartgallery.com/
+        name: "Креативное пространство и галерея Н.Б. Никогосяна"
+      - url: https://www.svetlovka.ru/
+        name: "Центральная городская молодежная библиотека им. М.А.Светлова"
+
+indexing-settings:
+  sleep-time-ms: 5000
+  count-pages-for-update: 200
+  load-page:
+    sleep-load-page-ms: 1000
+    user-agent: "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
+    referrer: "http://www.google.com"
+  search:
+    frequency-popular-lemma: 100
+    min-count-lemmas: 4
+    snippet-max-length: 300
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    username: worker
+    password: Test2000
+    url: jdbc:mysql://localhost:3306/search_engine?useSSL=false&requireSSL=false&allowPublicKeyRetrieval=true
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
