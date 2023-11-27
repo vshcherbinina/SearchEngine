@@ -61,6 +61,9 @@ public record Repositories(
     }
 
     public Site findSiteConfig(UrlStructure urlStructure) {
+        if (urlStructure.getDomainName().isBlank()) {
+            return null;
+        }
         for (Site siteConfig : configList.getSites()) {
             UrlStructure configUrlStructure = new UrlStructure(siteConfig.getUrl());
             if (urlStructure.equalsDomainName(configUrlStructure)) {

@@ -62,7 +62,7 @@ public class IndexServiceImpl implements IndexService {
     public ResponseEntity<GeneralResponse> indexPage(String url) {
         log.info("### Запуск индексации страницы: " + url + " ###");
         if (isExecutorServiceActive()) {
-            return GeneralResponse.newErrorResponse(HttpStatus.GONE, "Индексация уже запущена");
+            return GeneralResponse.newErrorResponse(HttpStatus.BAD_REQUEST, "Индексация уже запущена");
         }
         try {
             Repositories repositories = getInstanceRepositories();
@@ -75,7 +75,7 @@ public class IndexServiceImpl implements IndexService {
             siteLoader.loadPage();
             if (!siteLoader.getPageLoader().getPage().isSuccessLoad()) {
                 HttpStatus httpStatus = HttpStatus.valueOf(siteLoader.getPageLoader().getPage().getCode());
-                return GeneralResponse.newErrorResponse(httpStatus, httpStatus.getReasonPhrase());
+                return GeneralResponse.newErrorResponse(httpStatus, "Ошибка загрузки страницы: " + httpStatus.getReasonPhrase());
             }
             tasks.add(siteLoader);
             startExecutorService();
