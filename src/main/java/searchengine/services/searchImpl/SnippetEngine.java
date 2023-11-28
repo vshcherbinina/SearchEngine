@@ -1,6 +1,5 @@
 package searchengine.services.searchImpl;
 
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import searchengine.services.indexImpl.MorphologyUtils;

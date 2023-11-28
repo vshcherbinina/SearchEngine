@@ -1,20 +1,17 @@
 package searchengine.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.JDBCException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.Nullable;
 
 import java.util.Arrays;
 
 @Slf4j
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class GeneralResponse {
     public final static HttpStatus DEFAULT_ERROR_STATUS = HttpStatus.INTERNAL_SERVER_ERROR;

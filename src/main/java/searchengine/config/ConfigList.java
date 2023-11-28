@@ -1,12 +1,9 @@
 package searchengine.config;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -20,7 +17,7 @@ public class ConfigList {
     private final static int COUNT_PAGES_FOR_UPDATE_DEFAULT = 200;
     private final static int SLEEP_LOAD_PAGE_MS_DEFAULT = 1_000;
     private final static int MIN_COUNT_LEMMAS_DEFAULT = 300;
-    @Autowired
+
     private final SiteList sites;
     @Value("${indexing-settings.sleep-time-ms}")
     private int sleepTimeMs;

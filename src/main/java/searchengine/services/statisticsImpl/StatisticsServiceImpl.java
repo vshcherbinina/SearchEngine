@@ -1,12 +1,6 @@
 package searchengine.services.statisticsImpl;
 
-import com.mysql.cj.jdbc.exceptions.SQLError;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.JDBCException;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
-import org.hibernate.exception.GenericJDBCException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import searchengine.dto.statistics.DetailedStatisticsItem;
@@ -18,9 +12,6 @@ import searchengine.model.repositories.PageRepository;
 import searchengine.model.repositories.SiteRepository;
 import searchengine.services.StatisticsService;
 
-import java.sql.SQLException;
-import java.sql.SQLSyntaxErrorException;
-import java.sql.SQLTransientConnectionException;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StatisticsServiceImpl implements StatisticsService {
 
-    @Autowired
     private final SiteRepository siteRepository;
-    @Autowired
     private final PageRepository pageRepository;
-    @Autowired
     private final LemmaRepository lemmaRepository;
 
     private StatisticsResponse statisticsResponse;

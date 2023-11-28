@@ -3,21 +3,21 @@ package searchengine.services.searchImpl;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import searchengine.config.ConfigList;
 import searchengine.dto.search.SearchData;
 import searchengine.dto.search.SearchResponse;
-import searchengine.dto.statistics.StatisticsResponse;
 import searchengine.model.SiteEntity;
 import searchengine.model.repositories.*;
 import searchengine.services.SearchService;
 import searchengine.services.indexImpl.MorphologyUtils;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @Getter
@@ -25,13 +25,9 @@ import java.util.*;
 @RequiredArgsConstructor
 public class SearchServiceImpl implements SearchService {
 
-    @Autowired
     private final SiteRepository siteRepository;
-    @Autowired
     private final PageRepository pageRepository;
-    @Autowired
     private final IndexRepository indexRepository;
-    @Autowired
     private final LemmaRepository lemmaRepository;
 
     private final ConfigList configList;
@@ -80,6 +76,7 @@ public class SearchServiceImpl implements SearchService {
         }
         int end = Math.min(offset + limit, searchPages.size());
         for (int i = offset; i < end; i++) {
+            searchPages.get(i).prepareForResponse();
             searchResponse.getData().add(SearchData.getInstanceFromSearchPage(searchPages.get(i)));
         }
         if (end == searchPages.size()) {
@@ -146,7 +143,7 @@ public class SearchServiceImpl implements SearchService {
             loadSites(site);
             prepareResponse(offset, limit);
         } catch (Exception e) {
-            searchResponse.toErrorResponse(e, "Ошибка поиска");
+            return searchResponse.toErrorResponse(e, "Ошибка поиска");
         }
         return searchResponse.toSuccessResponse();
     }

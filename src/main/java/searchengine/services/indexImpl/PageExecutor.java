@@ -55,7 +55,7 @@ public class PageExecutor extends RecursiveTask<Boolean> implements AutoCloseabl
             }
             UrlStructure urlStructure = new UrlStructure(childPath);
             log.debug("path: " + childPath + " -> " + urlStructure.getPath());
-            if (urlStructure.equalsDomainName(siteExecutor.getSiteLoader().getSite().getUrlStructure())) {
+            if (!urlStructure.isIgnoreExtensions() && urlStructure.equalsDomainName(siteExecutor.getSiteLoader().getSite().getUrlStructure())) {
                 addChildIfNotExist(urlStructure);
             }
         }

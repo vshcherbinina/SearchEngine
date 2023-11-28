@@ -1,8 +1,10 @@
 package searchengine.dto.search;
 
+import lombok.Builder;
 import lombok.Data;
 import searchengine.services.searchImpl.SearchPage;
 
+@Builder
 @Data
 public class SearchData {
     private String site;
@@ -13,14 +15,13 @@ public class SearchData {
     private float relevance;
 
     public static SearchData getInstanceFromSearchPage(SearchPage searchPage) {
-        searchPage.prepareForResponse();
-        SearchData searchData = new SearchData();
-        searchData.setSite(searchPage.getSite().getUrl());
-        searchData.setSiteName(searchPage.getSite().getName());
-        searchData.setUri(searchPage.getPage().getPath());
-        searchData.setRelevance(searchPage.getRelativeRelevance());
-        searchData.setTitle(searchPage.getTitle());
-        searchData.setSnippet(searchPage.getSnippet());
-        return searchData;
+        return builder()
+                .site(searchPage.getSite().getUrl())
+                .siteName(searchPage.getSite().getName())
+                .uri(searchPage.getPage().getPath())
+                .relevance(searchPage.getRelativeRelevance())
+                .title(searchPage.getTitle())
+                .snippet(searchPage.getSnippet())
+                .build();
     }
 }

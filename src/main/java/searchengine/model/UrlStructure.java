@@ -25,11 +25,13 @@ public class UrlStructure {
             "([^?#,\\s/]+\\.[^?#,.\\s/]+)?" +       // domain name (II-level + zone + port)
             "/?([^?#,\\s]+)?";                      // path
     private final static Pattern PATTERN_URL = Pattern.compile(MASK_URL);
+    private static final String[] IGNORE_EXTENSIONS = new String[]{"xml", "pdf"};
 
     private String getGroupFromMatcher(Matcher matcher, int num) {
         String group = matcher.group(num);
         return group == null ? "" : group;
     }
+
     public UrlStructure(String urlInput) {
         this.urlInput = urlInput;
         Matcher matcher = PATTERN_URL.matcher(urlInput);
@@ -40,6 +42,16 @@ public class UrlStructure {
         this.subDomain =  getGroupFromMatcher(matcher, 2);
         this.domainName =  getGroupFromMatcher(matcher, 3);
         this.path = DELIMITER + getGroupFromMatcher(matcher, 4);
+    }
+
+    public boolean isIgnoreExtensions() {
+        String lowerPath = path.toLowerCase();
+        for (String ext: IGNORE_EXTENSIONS) {
+            if (lowerPath.endsWith("." + ext)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getUrl() {

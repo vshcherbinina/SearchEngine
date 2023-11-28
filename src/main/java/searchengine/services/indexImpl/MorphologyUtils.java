@@ -12,7 +12,7 @@ public class MorphologyUtils {
     private final LuceneMorphology luceneMorphology;
     public static final String WORD_REGEX_FOR_CHECK_WORD = "\\W\\w&&[^а-яА-Я\\s]";
     public static final String WORD_REGEX_FOR_REPLACE = "[^ЁёА-Яа-я\\s]";
-    private static final String[] particlesNames = new String[]{"МЕЖД", "ПРЕДЛ", "СОЮЗ", "ЧАСТ"};
+    private static final String[] PARTICLES_NAMES = new String[]{"МЕЖД", "ПРЕДЛ", "СОЮЗ", "ЧАСТ"};
 
     public static MorphologyUtils getInstance() throws IOException {
         LuceneMorphology morphology = new RussianLuceneMorphology();
@@ -100,7 +100,7 @@ public class MorphologyUtils {
 
     private boolean hasParticleProperty(String wordBase) {
         String[] wordProperties = wordBase.toUpperCase().trim().split(" ");
-        for (String property : particlesNames) {
+        for (String property : PARTICLES_NAMES) {
             for (String wordProperty : wordProperties) {
                 if (wordProperty.equals(property)) {
                     return true;

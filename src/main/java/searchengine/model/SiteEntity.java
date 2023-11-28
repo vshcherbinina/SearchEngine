@@ -37,9 +37,9 @@ public class SiteEntity {
     private UrlStructure urlStructure;
 
     public SiteEntity(String name, String url) {
-        this.name = (name == null || name.isBlank()) ? url : name;
-        this.url = url;
         this.urlStructure = new UrlStructure(url);
+        this.name = (name == null || name.isBlank()) ? url : name;
+        this.url = urlStructure.getProtocol() + urlStructure.getDomainName();
     }
 
     @Override
