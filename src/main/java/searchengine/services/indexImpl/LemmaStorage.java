@@ -55,6 +55,7 @@ public class LemmaStorage implements AutoCloseable{
                 if (!word.equals(lemma.getLemma())) {
                     continue;
                 }
+                lemma.setSite(siteLoader.getSite());
                 lemmas.put(word, lemma);
                 return lemma;
             }

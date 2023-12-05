@@ -23,9 +23,9 @@ public class UrlStructure {
             "(https?://)?" +                        // protocol
             "(.*w{3}\\.)?" +                        // authorisation + subDomain
             "([^?#,\\s/]+\\.[^?#,.\\s/]+)?" +       // domain name (II-level + zone + port)
-            "/?([^?#,\\s]+)?";                      // path
+            "/?([^#,\\s]+)?";                      // path
     private final static Pattern PATTERN_URL = Pattern.compile(MASK_URL);
-    private static final String[] IGNORE_EXTENSIONS = new String[]{"xml", "pdf"};
+    private static final String[] IGNORE_EXTENSIONS = new String[]{"xml", "pdf", "rss"};
 
     private String getGroupFromMatcher(Matcher matcher, int num) {
         String group = matcher.group(num);
@@ -45,9 +45,9 @@ public class UrlStructure {
     }
 
     public boolean isIgnoreExtensions() {
-        String lowerPath = path.toLowerCase();
+        String lowerPath = path.replaceAll(DELIMITER,"").toLowerCase();
         for (String ext: IGNORE_EXTENSIONS) {
-            if (lowerPath.endsWith("." + ext)) {
+            if (lowerPath.endsWith(ext)) {
                 return true;
             }
         }

@@ -2,16 +2,12 @@ parsing-settings:
     sites:
       - url: http://www.playback.ru/
         name: PlayBack.ru
-      - url: https://www.skillbox.ru
-        name: Skillbox
       - url: http://radiomv.ru/
         name: "Милицейская волна"
       - url: https://ipfran.ru/
         name: "Институт прикладной физики им. А.В. Гапонова-Грехова"
-      - url: https://dimonvideo.ru/
-        name: DIMONVIDEO
-      - url: https://nikoartgallery.com/
-        name: "Креативное пространство и галерея Н.Б. Никогосяна"
+      - url: https://ufaved.info/
+        name: ufaved.info
       - url: https://www.svetlovka.ru/
         name: "Центральная городская молодежная библиотека им. М.А.Светлова"
 
@@ -19,7 +15,7 @@ indexing-settings:
   sleep-time-ms: 5000
   count-pages-for-update: 200
   load-page:
-    sleep-load-page-ms: 1000
+    sleep-load-page-ms: 500
     user-agent: "Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6"
     referrer: "http://www.google.com"
   search:
